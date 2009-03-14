@@ -32,7 +32,7 @@ def Update():
 	return True
 
 def PressureAppletFactory(applet, iid):
-	image.set_from_file("/usr/share/pressure-applet/input-tablet.png")
+	image.set_from_icon_name("input-tablet", 16)
 	bar.set_size_request(50,-1)
 	
 	hbox.add(image)
