@@ -1,0 +1,21 @@
+Source: tablet-apps
+Section: electronics
+Priority: extra
+Maintainer: Ubuntu MOTU Developers <ubuntu-motu@lists.ubuntu.com>
+XSBC-Original-Maintainer: Karl Ostmo <kostmo@gmail.com>
+Standards-Version: 3.8.0
+Build-Depends: debhelper (>= 5), python, cdbs (>= 0.4.49)
+Build-Depends-Indep: perl, python-support (>= 0.5.3)
+XB-Python-Version: ${python:Versions}
+Homepage: http://www.alexmac.cc/tablet-apps/
+
+Package: tablet-apps
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}, python-gtk2, wacom-tools, xserver-xorg-input-wacom
+Description: Gnome panel and control center applets to configure and monitor graphics tablet devices
+ The gnome wacom applet is a small gnome panel applet that shows how much
+ pressure is being applied to your wacom tablet by the current device. Clicking
+ on the panel icon brings up a dialog allowing you to select a different device
+ and check what pressure and tilt information is being recieved from it. This
+ dialog also contains a small drawing test area to give your pen a quick test.
+

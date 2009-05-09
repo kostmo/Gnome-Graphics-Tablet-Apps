@@ -1,0 +1,5 @@
+This application is designed to let you configure Wacom tablets in Gnome.
+It is essentially just a GUI on top of xsetwacom.
+
+More information about xsetwacom can be found on the Linux Wacom Project's website:
+http://linuxwacom.sourceforge.net/index.php/main
