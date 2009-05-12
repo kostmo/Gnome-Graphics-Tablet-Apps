@@ -525,9 +525,10 @@ class DrawingTestWidget(gtk.DrawingArea):
 class GraphicsTabletApplet:
     ''' GUI for configuring wacom-compatible drawing tablets.
     '''
-    def __init__(self, gladefile):
+    def __init__(self, gladefile, statusicon):
 
         self.WidgetTree = gtk.glade.XML(gladefile)
+        self.StatusIcon = statusicon
 
         self.MainWindow = self.WidgetTree.get_widget("MainWindow")
         self.DeviceCombo = self.WidgetTree.get_widget("DeviceCombo")
@@ -550,8 +551,6 @@ class GraphicsTabletApplet:
         self.DrawingArea = DrawingTestWidget()
         self.DrawingArea.show()
         self.WidgetTree.get_widget("DrawingAlignment").add(self.DrawingArea)
-
-        self.StatusIcon = gtk.status_icon_new_from_icon_name("input-tablet-scalable")
 
         self.Device = 0
         self.DeviceMode = None
@@ -750,6 +749,8 @@ if __name__ == '__main__':
 
     import optparse
     parser = optparse.OptionParser()
+    parser.add_option("-l", "--local", action="store_true", dest="runlocal",
+        default=False, help="Run from current directory.")
     parser.add_option("-f", "--file", dest="filename",
         help="write config to FILE", metavar="FILE")
     parser.add_option("-s", "--set", action="store_true", dest="setandexit",
@@ -758,6 +759,13 @@ if __name__ == '__main__':
         default=False, help="get options and exit (don't run GUI)")
     (options, args) = parser.parse_args()
 
-    a = GraphicsTabletApplet("/usr/share/tablet-apps/tabletconfig.glade")
+    if options.runlocal:
+        statusicon = gtk.status_icon_new_from_file("./tabletconfig.svg")
+        gladefile = "./tabletconfig.glade"
+    else:
+        statusicon = gtk.status_icon_new_from_file("/usr/share/icons/tabletconfig.svg")
+        gladefile = "/usr/share/tablet-apps/tabletconfig.glade"
+
+    a = GraphicsTabletApplet(gladefile, statusicon)
     a.Run()
 
