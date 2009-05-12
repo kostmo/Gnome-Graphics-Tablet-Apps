@@ -551,6 +551,8 @@ class GraphicsTabletApplet:
         self.DrawingArea.show()
         self.WidgetTree.get_widget("DrawingAlignment").add(self.DrawingArea)
 
+        self.StatusIcon = gtk.status_icon_new_from_icon_name("input-tablet-scalable")
+
         self.Device = 0
         self.DeviceMode = None
         self.DeviceName = None
