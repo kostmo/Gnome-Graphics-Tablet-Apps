@@ -743,7 +743,19 @@ class GraphicsTabletApplet:
 
 ################################################################################
 
+
 if __name__ == '__main__':
+
+	import optparse
+	parser = optparse.OptionParser()
+	parser.add_option("-f", "--file", dest="filename",
+		help="write config to FILE", metavar="FILE")
+	parser.add_option("-s", "--set", action="store_true", dest="setandexit",
+		default=False, help="set options and exit (don't run GUI)")
+	parser.add_option("-g", "--get", action="store_true", dest="getandexit",
+		default=False, help="get options and exit (don't run GUI)")
+	(options, args) = parser.parse_args()
+
 	a = GraphicsTabletApplet("/usr/share/tablet-capplet/tablet-capplet.glade")
 	a.Run()
 
