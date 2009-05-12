@@ -1,3 +1,0 @@
-?package(tablet-apps):needs="X11" section="Utilities"\
-  title="tablet-apps" command="tablet-capplet"\
-  icon="/usr/share/pixmaps/input-tablet.png"
