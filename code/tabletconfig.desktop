@@ -2,8 +2,8 @@
 Encoding=UTF-8
 Name=Graphics Tablet
 Comment=Set your graphics tablet preferences
-Exec=tablet-capplet.py
-Icon=input-tablet
+Exec=tabletconfig
+Icon=tabletconfig
 Terminal=false
 StartupNotify=true
 Type=Application

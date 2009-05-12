@@ -758,6 +758,6 @@ if __name__ == '__main__':
         default=False, help="get options and exit (don't run GUI)")
     (options, args) = parser.parse_args()
 
-    a = GraphicsTabletApplet("/usr/share/tablet-capplet/tablet-capplet.glade")
+    a = GraphicsTabletApplet("/usr/share/tablet-apps/tabletconfig.glade")
     a.Run()
 
