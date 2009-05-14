@@ -11,9 +11,9 @@ if __name__ == "__main__":
 #		author_email="kostmo@gmail.com",
 		url="http://www.alexmac.cc/tablet-apps/",
 		version="0.3.1",
-		scripts=["pressure-applet.py", "tablet-capplet.py"],
+		scripts=["tablet-pressure-applet", "tablet-config"],
 		data_files=[
-			("share/tablet-capplet", ["tablet-capplet.glade", "input-tablet.png", "input-tablet.svg"])
+			("share/tablet-apps", ["tablet-config.glade", "input-tablet.png", "input-tablet.svg"])
 		]
 	)
 

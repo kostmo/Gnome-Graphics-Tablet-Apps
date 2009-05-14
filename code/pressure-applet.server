@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <oaf_info>
-  <oaf_server iid="OAFIID:GNOME_PressureApplet_Factory" type="exe" location="/usr/bin/pressure-applet.py">
+  <oaf_server iid="OAFIID:GNOME_PressureApplet_Factory" type="exe" location="/usr/bin/tablet-pressure-applet">
     <oaf_attribute name="repo_ids" type="stringv">
       <item value="IDL:Bonobo/GenericFactory:1.0"/>
       <item value="IDL:Bonobo/Unknown:1.0"/>

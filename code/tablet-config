@@ -760,11 +760,11 @@ if __name__ == '__main__':
     (options, args) = parser.parse_args()
 
     if options.runlocal:
-        statusicon = gtk.status_icon_new_from_file("./tabletconfig.svg")
-        gladefile = "./tabletconfig.glade"
+        statusicon = gtk.status_icon_new_from_file("./input-tablet.svg")
+        gladefile = "./tablet-config.glade"
     else:
-        statusicon = gtk.status_icon_new_from_file("/usr/share/icons/tabletconfig.svg")
-        gladefile = "/usr/share/tablet-apps/tabletconfig.glade"
+        statusicon = gtk.status_icon_new_from_file("/usr/share/icons/input-tablet.svg")
+        gladefile = "/usr/share/tablet-apps/tablet-config.glade"
 
     a = GraphicsTabletApplet(gladefile, statusicon)
     a.Run()
