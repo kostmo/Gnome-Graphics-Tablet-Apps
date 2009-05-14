@@ -6,10 +6,10 @@ DEB_PYTHON_SYSTEM=pysupport
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/class/python-distutils.mk
 
-build/tabletconfig::
-	pod2man --section=6 --release=$(VERSION) --center "" debian/tabletconfig.pod > tabletconfig.6
+build/tablet-apps::
+	pod2man --section=6 --release=$(VERSION) --center "" debian/tablet-apps.pod > tablet-apps.6
 
-cleanbuilddir/tabletconfig::
-	rm -f tabletconfig.6
+cleanbuilddir/tablet-apps::
+	rm -f tablet-apps.6
 
-DEB_INSTALL_MANPAGES_tabletconfig = tabletconfig.6
+DEB_INSTALL_MANPAGES_tablet-apps = tablet-apps.6

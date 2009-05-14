@@ -1,4 +1,4 @@
-Source: tabletconfig
+Source: tablet-apps
 Section: electronics
 Priority: extra
 Maintainer: Ubuntu MOTU Developers <ubuntu-motu@lists.ubuntu.com>
@@ -9,7 +9,7 @@ Build-Depends-Indep: perl, python-support (>= 0.5.3)
 XB-Python-Version: ${python:Versions}
 Homepage: http://www.alexmac.cc/tablet-apps/
 
-Package: tabletconfig
+Package: tablet-apps
 Architecture: all
 Depends: ${misc:Depends}, ${python:Depends}, python-gtk2, wacom-tools, xserver-xorg-input-wacom
 Description: Gnome panel and control center applets to configure and monitor graphics tablet devices
