@@ -763,8 +763,14 @@ if __name__ == '__main__':
         statusicon = gtk.status_icon_new_from_file("./input-tablet.svg")
         gladefile = "./tablet-config.glade"
     else:
-        statusicon = gtk.status_icon_new_from_file("/usr/share/icons/input-tablet.svg")
-        gladefile = "/usr/share/tablet-apps/tablet-config.glade"
+        script = sys.argv[0]
+        if script.endswith('bin/tablet-config'):
+            prefix = script.replace('bin/tablet-config', '')
+        else:
+            prefix = '/usr'
+        iconfile = os.path.join(prefix, 'share/tablet-apps/input-tablet.svg')
+        statusicon = gtk.status_icon_new_from_file(iconfile)
+        gladefile = os.path.join(prefix, 'share/tablet-apps/tablet-config.glade')
 
     a = GraphicsTabletApplet(gladefile, statusicon)
     a.Run()
