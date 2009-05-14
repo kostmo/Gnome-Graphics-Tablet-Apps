@@ -543,7 +543,7 @@ Absolute</property>
                 </child>
                 <child>
                   <widget class="GtkVBox" id="ButtonsVBox">
-                    <property name="visible">True</property>
+                    <property name="visible">False</property>
                     <property name="orientation">vertical</property>
                     <child>
                       <placeholder/>
@@ -572,7 +572,7 @@ Absolute</property>
                 </child>
                 <child>
                   <widget class="GtkVBox" id="CalibrationVBox">
-                    <property name="visible">True</property>
+                    <property name="visible">False</property>
                     <property name="orientation">vertical</property>
                     <child>
                       <placeholder/>
