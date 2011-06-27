@@ -8,13 +8,11 @@ if __name__ == "__main__":
         description="Gnome panel and control center applets to configure and monitor graphics tablet devices.",
         long_description="""The gnome wacom applet is a small gnome panel applet that shows how much pressure is being applied to your wacom tablet by the current device. Clicking on the panel icon brings up a dialog allowing you to select a different device and check what pressure and tilt information is being recieved from it. This dialog also contains a small drawing test area to give your pen a quick test.""",
         author="Alex Mac",
-#       author_email="kostmo@gmail.com",
+       author_email="alex@alexmac.cc",
         url="http://www.alexmac.cc/tablet-apps/",
-        version="0.3.1",
-        scripts=["tablet-pressure-applet", "tablet-config"],
+        version="0.4.0",
+        scripts=["tablet-config"],
         data_files=[
             ("share/tablet-apps", ["tablet-config.glade", "input-tablet.png", "input-tablet.svg"])
         ]
     )
-
-

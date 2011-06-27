@@ -1,201 +1,23 @@
 =head1 NAME
 
-ppower - Client for controlling x10 hardware.
+tablet-config - GNOME control center utility to configure graphics tablet devices
 
 =head1 SYNOPSIS
 
-B<ppower> S<[I<OPTION>]... [I<COMMAND>]>
+B<tablet-config> S<[I<OPTION>]... [I<COMMAND>]>
 
 =head1 DESCRIPTION
 
-Ppower is the client program for accessing x10 hardware.  With it you can
-ask the ppowerd daemon to change the state of x10 hardware as well as
-monitor x10 messages received by the daemon from the power line.
-
-=head2 Command Format
-
-If no other arguments are given, ppower expects a command.  The command is
-of the form
-
-[I<DEVICE>],...:[I<STATE>]<:I<VALUE>><:I<EXTENDED VALUE>>
-
-A I<DEVICE> is specified as a housecode letter and a devicecode digit like
-"a1" or a named device like "light1" if such a name has been defined in the
-configuration file.
-
-The I<VALUE> is used by B<BIM> and B<BRIGHT> commands to specify the change
-from 0 to 22, where 0 is the least change.  
-
-An B<EXTENDED_DATA_TRANSFER> requires the I<VALUE> and I<EXTENDED VALUE> to
-be specified.
-
-See the B<EXAMPLES> section for example commands.
-
-=head2 States
-
-=over 7
-
-=item B<ALL_UNITS_OFF>
-
-Turn all units on the given housecode off.  For this command, instead of a
-device list, you can specify the housecode letter.
-
-=item B<ALL_LIGHTS_ON>
-
-Turn all lights on the given housecode on.  For this command, instead of a
-device list, you can specify the housecode letter.
-
-=item B<ON>
-
-Turn the selected devices on.
-
-=item B<OFF>
-
-Turn the selected devices off.
-
-=item B<DIM>
-
-Dim the selected devices by a I<VALUE>.
-
-=item B<BRIGHT>
-
-Brighten the selected devices by a I<VALUE>.
-
-=item B<ALL_LIGHTS_OFF>
-
-Turn all lights on the given housecode off.  For this command, instead of a
-device list, you can specify the housecode letter.
-
-=item B<EXTENDED_CODE>
-
-XXX: I haven't figured out what this does.  It might only pertain to
-hardware macros.
-
-=item B<HAIL_REQUEST>
-
-Sends a hail request to the listed devices.
-
-=item B<HAIL_ACKNOWLEDGE>
-
-Sends a hail acknowledge to the listed devices.
-
-=item B<PRESET_DIM1>
-
-Sends the first preset dim to the listed devices.
-
-=item B<PRESET_DIM2>
-
-Sends the second preset dim to the listed devices.
-
-=item B<EXTENDED_DATA_TRANSFER>
-
-Sends two bytes of data to selected devices.  The I<VALUE> and I<EXTENDED
-VALUE> must be specified.
-
-=item B<STATUS_ON>
-
-XXX: Unknown.
-
-=item B<STATUS_OFF>
-
-XXX: Unknown.
-
-=item B<STATUS_REQUEST>
-
-Returns the status of the listed devices.  The only thing I have that
-answers this is the transceiver.
-
-=back
-
-=head1 OPTIONS
-
-=over 7
-
-=item B<-v, --version>
-
-display program vesrion
-
-=item B<-h, --help>
-
-give help on usage
-
-=item B<-m, --monitor>
-
-monitors the x10 hardware for changes
-
-=item B<-s, --status>
-
-reports status of known x10 devices
-
-=item B<-f, --conf=FILE>
-
-specify alternate configuration file
-
-=item B<-d, --debug=LEVEL> 
-
-set the debug level, 0 is off; check the program's --help to see what the
-maximum debug level currently is as well as the compiled in default
-
-=item B<--refresh>
-
-force the daemon to reload the configuration file; this is mainly for
-devices, aliases and macros; sockets and permissions won't be affected
-
-=item B<--shutdown>
-
-stop the currently running daemon
-
-=back
-
-=head1 EXAMPLES
-
-=head2 Issuing Commands
-
-Turn the device set to a1 on.
-B<    ppower a1:ON>
-
-Turn the fan you have listed in your configuration file on.
-B<    ppower fan:ON>
-
-Turn a group of devices on.
-B<    ppower a1,b2,c3:ON>
-
-Dim the light attached to a2 by about 50%.
-B<    ppower a2:DIM:11>
-
-Dim the light attached to a2 as far as it will go.
-B<    ppower a2:DIM:22>
-
-=head2 Listening to the Daemon
-
-Monitor incoming x10 commands.
-B<    ppower -m>
-
-List the status of all known devices.
-B<    ppower -s>
-
-=head1 FILES
-
-=over 7
-
-=item F<ppower.conf>
-
-The configuration file for the ppower package.  See the example
-configuration file included in the distribution and the documentation for
-examples.
-
-=back
-
-=head1 AUTHOR
-
-Steven Brown <swbrown@ucsd.edu>.
-
-=head1 BUGS
-
-A lot of the states arn't accepted by any x10 hardware I know of.  Also, a
-lot of functionality is missing or half-implemented as this project is quite
-new.  Check the B<TODO> file included in the distribution for a better list.
+ The tablet-config utility allows you to select a different device
+ and check what pressure and tilt information is being recieved from it. This
+ dialog also contains a small drawing test area to give your pen a quick test.
+
+=head1 AUTHORS
+
+Alex Mac <alex@alexmac.cc>
+Thomas Iorns <mesilliac@gmail.com>
+Juho Vepsala
 
 =head1 REPORTING BUGS
 
-Report bugs to <swbrown@ucsd.edu>.
+Report bugs at http://groups.google.co.uk/group/alexmac

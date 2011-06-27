@@ -1,15 +1,17 @@
 This package was debianized by Karl Ostmo <kostmo@gmail.com> on
-Sun, 29 Jun 2008 16:00:00 -0500.
+Thu, 21 May 2009 16:00:00 -0500.
 
-It was downloaded from http://pyrocket.googlecode.com/
+It was downloaded from http://www.alexmac.cc/tablet-apps/
 
-Upstream Author:
+Upstream Authors:
 
-    Karl Ostmo <kostmo@gmail.com>
+    Alex Mac <alex@alexmac.cc>
+    Thomas Iorns <mesilliac@gmail.com>
+    Juho Vepsala
 
 Copyright:
 
-    Copyright (C) 2008 Karl Ostmo <kostmo@gmail.com>
+    Copyright © 2008 Alex Mac <alex@alexmac.cc>
 
 License:
 
@@ -28,6 +30,9 @@ License:
     if not, write to the Free Software Foundation, Inc., 51 Franklin Street,
     Fifth Floor, Boston, MA 02110-1301, USA
 
-You are free to distribute this software under the terms of the GNU General
-Public License. On Debian systems, the complete text of the GNU General
-Public License can be found in /usr/share/common-licenses/GPL-2 file.
+    You are free to distribute this software under the terms of the GNU General
+    Public License. On Debian systems, the complete text of the GNU General
+    Public License can be found in /usr/share/common-licenses/GPL file.
+
+The Debian packaging is copyright 2009, Karl Ostmo <kostmo@gmail.com> and
+is licensed under version 2 of the GPL, see `/usr/share/common-licenses/GPL-2'.

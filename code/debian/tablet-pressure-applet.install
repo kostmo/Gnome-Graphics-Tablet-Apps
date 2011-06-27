@@ -1,3 +1,2 @@
-input-tablet.png			/usr/share/pixmaps
+pressure-applet.server		/usr/lib/bonobo/servers/
 input-tablet.svg			/usr/share/icons
-debian/tablet-apps.desktop		/usr/share/applications

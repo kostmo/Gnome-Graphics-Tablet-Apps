@@ -2,14 +2,14 @@
 
 . package_defines.sh
 
-cd src
+cd code
 dch -m
 cd ..
-svn export src $RELEASE_NAME.orig
+cp -r code $RELEASE_NAME.orig
 cd $RELEASE_NAME.orig
 rm -r debian
 cd ..
-svn export src $RELEASE_NAME
+cp -r code $RELEASE_NAME
 cd $RELEASE_NAME
 debuild -S -sa
 cd ..

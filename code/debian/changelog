@@ -1,6 +1,5 @@
-tablet-apps (0.3.1-0ubuntu1) karmic; urgency=low
+tablet-apps (0.4.1-0ubuntu1) karmic; urgency=low
 
   * Initial Ubuntu package (LP: #372574)
 
-
- -- Karl Ostmo <kostmo@gmail.com>  Wed, 6 May 2009 19:29:33 -0500
+ -- Karl Ostmo <kostmo@gmail.com>  Wed, 20 May 2009 22:44:33 -0500
