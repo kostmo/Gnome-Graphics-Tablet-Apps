@@ -531,6 +531,8 @@ class GraphicsTabletApplet:
         self.StatusIcon = statusicon
 
         self.MainWindow = self.WidgetTree.get_widget("MainWindow")
+        self.MainWindow.connect("destroy", self.destroy)
+        
         self.DeviceCombo = self.WidgetTree.get_widget("DeviceCombo")
         self.ModeCombo = self.WidgetTree.get_widget("ModeCombo")
         self.XTilt = self.WidgetTree.get_widget("xtilt")
@@ -547,6 +549,7 @@ class GraphicsTabletApplet:
         self.Curve = PressureCurveWidget()
         self.Curve.show()
         self.WidgetTree.get_widget("PressureVBox").add(self.Curve)
+        self.WidgetTree.get_widget("imagemenuitemAbout").connect("activate", self.show_about)
 
         self.DrawingArea = DrawingTestWidget()
         self.DrawingArea.show()
@@ -570,10 +573,27 @@ class GraphicsTabletApplet:
         self.ClickForce = None
         self.TPCButton = None
 
+    def show_about(self, widget):
+        
+        import tablet_prog_info
+        about = gtk.AboutDialog()
+        about.set_name("Foo bar")
+        about.set_version("Foo bar")
+        about.set_website(tablet_prog_info.WEBSITE)
+        about.set_authors([tablet_prog_info.AUTHOR, "Alex Mac"])
+        about.run()
+
+    def destroy(self, widget, data=None):
+        print "destroy signal occurred"
+        gtk.main_quit()
+
     def Run(self):
         ''' Set up device list and start main window app.
         '''
-        for d in gtk.gdk.devices_list():
+        
+        devices_list = gtk.gdk.devices_list()
+        print "How many items in devices list?", len(devices_list)
+        for d in devices_list:
             devicename = str(d.name)
             self.DeviceList.append([devicename])
             toolID = xswGet(devicename, "ToolID")
@@ -587,8 +607,10 @@ class GraphicsTabletApplet:
         self.UpdateChildren()
         gobject.idle_add(self.Update)
 
-        self.MainWindow.run()
-        self.MainWindow.hide()
+
+        self.MainWindow.show()
+#        self.MainWindow.hide()
+        gtk.main()
 
     def GetPressure(self):
         ''' Return current device pressure.
@@ -686,7 +708,7 @@ class GraphicsTabletApplet:
             return
 
         for button in self.TPCRadioButton.get_group():
-            if button != TPCRadioButton:  # there's only one other
+            if button != self.TPCRadioButton:  # there's only one other
                 button.set_active(True)
                 return
 
@@ -767,7 +789,7 @@ if __name__ == '__main__':
         if script.endswith('bin/tablet-config'):
             prefix = script.replace('bin/tablet-config', '')
         else:
-            prefix = '/usr'
+            prefix = '/usr/local'
         iconfile = os.path.join(prefix, 'share/tablet-apps/input-tablet.svg')
         statusicon = gtk.status_icon_new_from_file(iconfile)
         gladefile = os.path.join(prefix, 'share/tablet-apps/tablet-config.glade')
