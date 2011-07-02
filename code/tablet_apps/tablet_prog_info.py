@@ -1,2 +1,5 @@
+NAME = "Tablet Apps"
 AUTHOR = "Karl Ostmo"
+EMAIL = "kostmo@gmail.com"
 WEBSITE = "http://kostmo.github.com/Gnome-Graphics-Tablet-Apps/"
+VERSION = "0.4.0"

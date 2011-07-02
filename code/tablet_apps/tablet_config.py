@@ -550,6 +550,7 @@ class GraphicsTabletApplet:
         self.Curve.show()
         self.WidgetTree.get_widget("PressureVBox").add(self.Curve)
         self.WidgetTree.get_widget("imagemenuitemAbout").connect("activate", self.show_about)
+        self.WidgetTree.get_widget("menuitemQuit").connect("activate", self.destroy)
 
         self.DrawingArea = DrawingTestWidget()
         self.DrawingArea.show()
@@ -577,11 +578,13 @@ class GraphicsTabletApplet:
         
         import tablet_prog_info
         about = gtk.AboutDialog()
-        about.set_name("Foo bar")
-        about.set_version("Foo bar")
+        about.set_name(tablet_prog_info.NAME)
+        about.set_version(tablet_prog_info.VERSION)
         about.set_website(tablet_prog_info.WEBSITE)
-        about.set_authors([tablet_prog_info.AUTHOR, "Alex Mac"])
-        about.run()
+        about.set_website_label("Source code on GitHub")
+        about.set_authors([tablet_prog_info.AUTHOR, "Alexander Macdonald", "Tommy", "Juho Vepsalainen"])
+        response = about.run()
+        about.hide()
 
     def destroy(self, widget, data=None):
         print "destroy signal occurred"
