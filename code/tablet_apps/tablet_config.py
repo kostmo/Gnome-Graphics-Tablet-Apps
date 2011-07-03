@@ -574,6 +574,7 @@ class GraphicsTabletApplet:
 
         self.ClickForce = None
         self.TPCButton = None
+        self.destroying = False
 
     def show_about(self, widget):
         
@@ -588,7 +589,7 @@ class GraphicsTabletApplet:
         about.hide()
 
     def destroy(self, widget, data=None):
-        print "destroy signal occurred"
+        self.destroying = True
         gtk.main_quit()
 
     def Run(self):
@@ -733,6 +734,9 @@ class GraphicsTabletApplet:
         self.UpdateChildren()
 
     def Update(self):
+        if self.destroying:
+            return False
+
         p = self.GetPressure()
 
         if p == None:
