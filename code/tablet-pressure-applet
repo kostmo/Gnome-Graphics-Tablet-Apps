@@ -11,6 +11,7 @@
 ############################################################################
 
 import sys
+import os
 import pygtk
 pygtk.require('2.0')
 import gtk
@@ -49,11 +50,9 @@ class PressureDisplay:
 
         print "Import of config app succeded."
 
-        import os
-        prefix = './'
-        iconfile = os.path.join(prefix, 'input-tablet.svg')
+        iconfile = os.path.join(self.resources_path, 'input-tablet.svg')
         statusicon = gtk.status_icon_new_from_file(iconfile)
-        gladefile = os.path.join(prefix, 'tablet-config.glade')
+        gladefile = os.path.join(self.resources_path, 'tablet-config.glade')
         a = GraphicsTabletApplet(gladefile, statusicon)
         a.Run()
 
