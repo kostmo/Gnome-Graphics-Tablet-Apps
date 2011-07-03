@@ -5,6 +5,7 @@
 ##      2007-2009 Alexander Macdonald
 ##      2008 Juho Vepsalainen
 ##      2009 Thomas Iorns <yobbobandana@yahoo.co.nz>
+##      2011 Karl Ostmo <kostmo@gmail.com>
 ##
 ## This program is free software; you can redistribute it and/or
 ## modify it under the terms of the GNU General Public License version 2
@@ -582,7 +583,7 @@ class GraphicsTabletApplet:
         about.set_version(tablet_prog_info.VERSION)
         about.set_website(tablet_prog_info.WEBSITE)
         about.set_website_label("Source code on GitHub")
-        about.set_authors([tablet_prog_info.AUTHOR, "Alexander Macdonald", "Tommy", "Juho Vepsalainen"])
+        about.set_authors([tablet_prog_info.AUTHOR, "Alexander Macdonald", "Thomas Iorns", "Juho Vepsalainen"])
         response = about.run()
         about.hide()
 
@@ -766,37 +767,4 @@ class GraphicsTabletApplet:
         self.ToolID.set_label(str(id))
 
         return True
-
-################################################################################
-
-
-if __name__ == '__main__':
-
-    import optparse
-    parser = optparse.OptionParser()
-    parser.add_option("-l", "--local", action="store_true", dest="runlocal",
-        default=False, help="Run from current directory.")
-    parser.add_option("-f", "--file", dest="filename",
-        help="write config to FILE", metavar="FILE")
-    parser.add_option("-s", "--set", action="store_true", dest="setandexit",
-        default=False, help="set options and exit (don't run GUI)")
-    parser.add_option("-g", "--get", action="store_true", dest="getandexit",
-        default=False, help="get options and exit (don't run GUI)")
-    (options, args) = parser.parse_args()
-
-    if options.runlocal:
-        statusicon = gtk.status_icon_new_from_file("./input-tablet.svg")
-        gladefile = "./tablet-config.glade"
-    else:
-        script = sys.argv[0]
-        if script.endswith('bin/tablet-config'):
-            prefix = script.replace('bin/tablet-config', '')
-        else:
-            prefix = '/usr/local'
-        iconfile = os.path.join(prefix, 'share/tablet-apps/input-tablet.svg')
-        statusicon = gtk.status_icon_new_from_file(iconfile)
-        gladefile = os.path.join(prefix, 'share/tablet-apps/tablet-config.glade')
-
-    a = GraphicsTabletApplet(gladefile, statusicon)
-    a.Run()
 

@@ -15,12 +15,12 @@ Depends: ${misc:Depends}, ${python:Depends}, python-gtk2, xserver-xorg-input-wac
 Enhances: tablet-pressure-applet
 Description: GUI utility to configure graphics tablet devices
  The tablet-config utility allows one to select among tablet devices and
- observe what pressure and tilt information is being recieved from it. This
+ observe what pressure and tilt information is being received from it. This
  dialog also contains a small drawing area to give your pen a quick test.
 
 Package: tablet-pressure-applet
 Architecture: all
-Depends: ${misc:Depends}, ${python:Depends}, python-gtk2, python-gnome2-desktop, xserver-xorg-input-wacom
+Depends: ${misc:Depends}, ${python:Depends}, python-gtk2, python-gnomeapplet, xserver-xorg-input-wacom
 Suggests: tablet-config
 Description: GNOME panel applet to monitor graphics tablet device
  The tablet-pressure-applet is a small GNOME panel applet that shows how much

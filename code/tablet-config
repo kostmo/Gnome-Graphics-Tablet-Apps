@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+
+import sys, os
+import pygtk
+pygtk.require('2.0')
+import gtk
+
+from tablet_apps.tablet_config import GraphicsTabletApplet
+
+if __name__ == '__main__':
+
+	import optparse
+	parser = optparse.OptionParser()
+	parser.add_option("-l", "--local", action="store_true", dest="runlocal",
+		default=False, help="Run from current directory.")
+	parser.add_option("-f", "--file", dest="filename",
+		help="write config to FILE", metavar="FILE")
+	parser.add_option("-s", "--set", action="store_true", dest="setandexit",
+		default=False, help="set options and exit (don't run GUI)")
+	parser.add_option("-g", "--get", action="store_true", dest="getandexit",
+		default=False, help="get options and exit (don't run GUI)")
+	(options, args) = parser.parse_args()
+
+	if options.runlocal:
+		statusicon = gtk.status_icon_new_from_file("./input-tablet.svg")
+		gladefile = "./tablet-config.glade"
+	else:
+		script = sys.argv[0]
+		if script.endswith('bin/tablet-config'):
+			prefix = script.replace('bin/tablet-config', '')
+		else:
+			prefix = '/usr/local'
+		iconfile = os.path.join(prefix, 'share/tablet-apps/input-tablet.svg')
+		statusicon = gtk.status_icon_new_from_file(iconfile)
+		gladefile = os.path.join(prefix, 'share/tablet-apps/tablet-config.glade')
+
+	a = GraphicsTabletApplet(gladefile, statusicon)
+	a.Run()
+

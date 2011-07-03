@@ -1,2 +1,3 @@
 pressure-applet.server		/usr/lib/bonobo/servers/
-input-tablet.svg			/usr/share/icons
+input-tablet.svg		/usr/share/icons
+tablet-pressure-applet		/usr/bin

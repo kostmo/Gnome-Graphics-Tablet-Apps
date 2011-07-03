@@ -1,4 +1,9 @@
 #!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+export DH_VERBOSE=1
+
 
 DEB_PYTHON_SYSTEM=pysupport
 
@@ -24,3 +29,4 @@ cleanbuilddir/tablet-config::
 	rm -f tablet-config.6
 
 DEB_INSTALL_MANPAGES_tablet-config = tablet-config.6
+
