@@ -1,0 +1,107 @@
+#!/usr/bin/env python
+############################################################################
+##
+## Copyright (C) 2007 Alexander Macdonald. All rights reserved.
+##
+## This program is free software; you can redistribute it and/or
+## modify it under the terms of the GNU General Public License version 2
+##
+## Gnome Panel Pressure Applet
+##
+############################################################################
+
+import sys
+import pygtk
+pygtk.require('2.0')
+import gtk
+import gobject
+import gnomeapplet
+
+
+class PressureDisplay:
+    def __init__(self):
+
+        self.bar = gtk.ProgressBar()
+        self.image = gtk.Image()
+        self.hbox = gtk.HBox()
+        self.event_box = gtk.EventBox()
+
+    def show_config_app(self, widget, data):
+
+        try:
+            from tablet_apps.tablet_config import GraphicsTabletApplet
+        except ImportError, e:
+            print "Missing Python module: \"tablet_config\"."
+
+            dialog = gtk.Dialog(title="Feature not installed.")
+
+            box = dialog.get_content_area()
+            label = gtk.Label("Configuration panel not installed.\nPlease install the package \"tablet-config\".")
+            dialog.add_buttons("Close", gtk.RESPONSE_CLOSE)
+            box.add(label)
+            label.show()
+            result = dialog.run()
+            dialog.hide()
+
+            return
+
+        print "Import of config app succeded."
+
+        import os
+        prefix = './'
+        iconfile = os.path.join(prefix, 'input-tablet.svg')
+        statusicon = gtk.status_icon_new_from_file(iconfile)
+        gladefile = os.path.join(prefix, 'tablet-config.glade')
+        a = GraphicsTabletApplet(gladefile, statusicon)
+        a.Run()
+
+
+    def pressureAppletFactory(self, applet, iid):
+
+        self.event_box.add(self.image)
+        self.image.set_from_icon_name("input-tablet", 16)
+        self.event_box.set_events(gtk.gdk.BUTTON_PRESS_MASK)
+        self.event_box.connect("button_press_event", self.show_config_app)
+
+        self.bar.set_size_request(50, -1)
+
+        self.hbox.add(self.event_box)
+        self.hbox.add(self.bar)
+        applet.add(self.hbox)
+
+        applet.show_all()
+        applet.set_extension_events(gtk.gdk.EXTENSION_EVENTS_ALL)
+        gobject.timeout_add(75, self.update)
+        return True
+
+    def update(self):
+        pressure = 0.0
+        for dev in gtk.gdk.devices_list():
+            p = dev.get_axis(dev.get_state(self.hbox.window)[0], gtk.gdk.AXIS_PRESSURE)
+            if p != None:
+                if p > pressure:
+                    pressure = p
+        self.bar.set_fraction(pressure)
+        return True
+
+
+if __name__ == "__main__":
+
+    print "Launching pressure applet!"
+
+    pressure_display = PressureDisplay()
+
+    if len(sys.argv) == 2 and sys.argv[1] == "debug":
+        main_window = gtk.Window(gtk.WINDOW_TOPLEVEL)
+        main_window.set_title("Pressure Applet")
+        main_window.connect("delete_event", gtk.main_quit)
+        app = gnomeapplet.Applet()
+        pressure_display.pressureAppletFactory(app, None)
+        app.reparent(main_window)
+        main_window.show_all()
+        gtk.main()
+        sys.exit()
+
+
+    gnomeapplet.bonobo_factory("OAFIID:GNOME_PressureApplet_Factory", gnomeapplet.Applet.__gtype__, "Display tablet device pressure", "1.0", pressure_display.pressureAppletFactory)
+
