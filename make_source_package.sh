@@ -11,6 +11,8 @@ cp -r code $RELEASE_NAME.orig
 cd $RELEASE_NAME.orig
 rm -r debian
 cd ..
+tar -cvf $RELEASE_NAME.orig.tar $RELEASE_NAME.orig
+
 cp -r code $RELEASE_NAME
 cd $RELEASE_NAME
 debuild -S -sa
