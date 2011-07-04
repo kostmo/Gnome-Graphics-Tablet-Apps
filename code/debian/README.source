@@ -1,4 +1,0 @@
-The decision to create two binary packages was made to remove GNOME library
-dependence from the tablet-config utility.  The panel-applet is intended
-specifically for GNOME desktops, but the config utility can run on KDE or
-others.
