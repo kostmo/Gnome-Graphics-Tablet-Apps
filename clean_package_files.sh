@@ -1,9 +1,8 @@
 #!/bin/bash
 
-. code/package_defines.mk
+. src/package_defines.mk
 
-rm -rf code/build/
-rm -r $RELEASE_NAME*
+rm -rf src/build/
 rm -r $DISTRIBUTABLE_NAME*
 rm *.deb
 

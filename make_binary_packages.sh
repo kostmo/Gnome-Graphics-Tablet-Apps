@@ -1,14 +1,14 @@
 #!/bin/bash
 
-. code/package_defines.mk
+. src/package_defines.mk
 
 ./clean_package_files.sh
 
-cp -r code $RELEASE_NAME.orig
+cp -r src $RELEASE_NAME.orig
 cd $RELEASE_NAME.orig
 rm -r debian
 cd ..
-cp -r code $RELEASE_NAME
+cp -r src $RELEASE_NAME
 cd $RELEASE_NAME
 debuild
 cd ..
