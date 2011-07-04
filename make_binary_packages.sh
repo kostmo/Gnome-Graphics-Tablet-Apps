@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. package_defines.sh
+. code/package_defines.mk
 
 cp -r code $RELEASE_NAME.orig
 cd $RELEASE_NAME.orig

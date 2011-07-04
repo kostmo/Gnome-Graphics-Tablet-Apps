@@ -28,11 +28,12 @@ class PressureDisplay:
         self.image = gtk.Image()
         self.hbox = gtk.HBox()
         self.event_box = gtk.EventBox()
+        self.config_app = None
 
     def show_config_app(self, widget, data):
 
         try:
-            from tablet_apps.tablet_config import GraphicsTabletApplet
+            from tablet_apps.tablet_config import GraphicsTabletConfigTool
         except ImportError, e:
             print "Missing Python module: \"tablet_config\"."
 
@@ -45,22 +46,17 @@ class PressureDisplay:
             label.show()
             result = dialog.run()
             dialog.hide()
-
             return
 
-        print "Import of config app succeded."
-
         iconfile = os.path.join(self.resources_path, 'input-tablet.svg')
-        statusicon = gtk.status_icon_new_from_file(iconfile)
         gladefile = os.path.join(self.resources_path, 'tablet-config.glade')
-        a = GraphicsTabletApplet(gladefile, statusicon)
-        a.Run()
-
+        self.config_app = GraphicsTabletConfigTool(gladefile, iconfile, False)
+        self.config_app.Run()
 
     def pressureAppletFactory(self, applet, iid):
 
         self.event_box.add(self.image)
-        self.image.set_from_icon_name("input-tablet", 16)
+        self.image.set_from_icon_name("input-tablet", 32)
         self.event_box.set_events(gtk.gdk.BUTTON_PRESS_MASK)
         self.event_box.connect("button_press_event", self.show_config_app)
 
@@ -76,6 +72,8 @@ class PressureDisplay:
         return True
 
     def update(self):
+        if not self.running:
+            return False
         pressure = 0.0
         for dev in gtk.gdk.devices_list():
             p = dev.get_axis(dev.get_state(self.hbox.window)[0], gtk.gdk.AXIS_PRESSURE)
@@ -85,6 +83,9 @@ class PressureDisplay:
         self.bar.set_fraction(pressure)
         return True
 
+    def quit(self, widget, data=None):
+        self.running = False
+        gtk.main_quit()
 
 if __name__ == "__main__":
 
@@ -94,18 +95,18 @@ if __name__ == "__main__":
 
     if len(sys.argv) == 2 and sys.argv[1] == "debug":
 
-#        pressure_display.resources_path = "./"
+        pressure_display.resources_path = "./"
 
         main_window = gtk.Window(gtk.WINDOW_TOPLEVEL)
         main_window.set_title("Pressure Applet")
-        main_window.connect("delete_event", gtk.main_quit)
+        main_window.connect("delete_event", pressure_display.quit)
         app = gnomeapplet.Applet()
         pressure_display.pressureAppletFactory(app, None)
         app.reparent(main_window)
         main_window.show_all()
+	pressure_display.running = True
         gtk.main()
-        sys.exit()
 
-
-    gnomeapplet.bonobo_factory("OAFIID:GNOME_PressureApplet_Factory", gnomeapplet.Applet.__gtype__, "Display tablet device pressure", "1.0", pressure_display.pressureAppletFactory)
+    else:
+	    gnomeapplet.bonobo_factory("OAFIID:GNOME_PressureApplet_Factory", gnomeapplet.Applet.__gtype__, "Display tablet device pressure", "1.0", pressure_display.pressureAppletFactory)
 

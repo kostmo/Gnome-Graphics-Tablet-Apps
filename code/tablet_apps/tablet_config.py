@@ -441,7 +441,7 @@ class DrawingTestWidget(gtk.DrawingArea):
 
         gtk.DrawingArea.__init__(self)
 
-        self.Device = 0
+        self.device_index = 0
         self.Radius = 5.0
         self.Drawing = False
         self.WindowSize = None
@@ -471,7 +471,7 @@ class DrawingTestWidget(gtk.DrawingArea):
     def GetPressure(self):
         ''' Return the current device pressure.
         '''
-        dev = gtk.gdk.devices_list()[self.Device]
+        dev = gtk.gdk.devices_list()[self.device_index]
         state = dev.get_state(self.window)
         return dev.get_axis(state[0], gtk.gdk.AXIS_PRESSURE)
 
@@ -523,14 +523,14 @@ class DrawingTestWidget(gtk.DrawingArea):
         cr.rectangle(0.0, 0.0, self.WindowSize[0], self.WindowSize[1])
         cr.stroke()
 
-class GraphicsTabletApplet:
+class GraphicsTabletConfigTool:
     ''' GUI for configuring wacom-compatible drawing tablets.
     '''
-    def __init__(self, gladefile, statusicon):
+    def __init__(self, gladefile, iconfile, standalone=True):
 
         self.WidgetTree = gtk.glade.XML(gladefile)
-        self.StatusIcon = statusicon
-
+#        self.StatusIcon = gtk.status_icon_new_from_file(iconfile)
+        self.standalone = standalone
         self.MainWindow = self.WidgetTree.get_widget("MainWindow")
         self.MainWindow.connect("destroy", self.destroy)
         
@@ -551,13 +551,13 @@ class GraphicsTabletApplet:
         self.Curve.show()
         self.WidgetTree.get_widget("PressureVBox").add(self.Curve)
         self.WidgetTree.get_widget("imagemenuitemAbout").connect("activate", self.show_about)
-        self.WidgetTree.get_widget("menuitemQuit").connect("activate", self.destroy)
+        self.WidgetTree.get_widget("menuitemQuit").connect("activate", self.quit)
 
         self.DrawingArea = DrawingTestWidget()
         self.DrawingArea.show()
         self.WidgetTree.get_widget("DrawingAlignment").add(self.DrawingArea)
 
-        self.Device = 0
+        self.device_index = 0
         self.DeviceMode = None
         self.DeviceName = None
 
@@ -574,7 +574,7 @@ class GraphicsTabletApplet:
 
         self.ClickForce = None
         self.TPCButton = None
-        self.destroying = False
+        self.running = True
 
     def show_about(self, widget):
         
@@ -588,46 +588,55 @@ class GraphicsTabletApplet:
         response = about.run()
         about.hide()
 
+
+    def quit(self, widget, data=None):
+        self.MainWindow.destroy()
+        self.destroy(widget, data)
+
     def destroy(self, widget, data=None):
-        self.destroying = True
-        gtk.main_quit()
+        self.running = False
+        if self.standalone:
+            gtk.main_quit()
 
     def Run(self):
         ''' Set up device list and start main window app.
         '''
+
+        self.DeviceList.clear()
         
         devices_list = gtk.gdk.devices_list()
-        print "How many items in devices list?", len(devices_list)
         for d in devices_list:
             devicename = str(d.name)
             self.DeviceList.append([devicename])
             toolID = xswGet(devicename, "ToolID")
             if toolID >= 0: # valid wacom device
-                self.Device = max(len(self.DeviceList) - 1, 0)
+                self.device_index = max(len(self.DeviceList) - 1, 0)
             else:
                 pass
 
-        self.DeviceCombo.set_active(self.Device)
-        self.DeviceName = gtk.gdk.devices_list()[self.Device].name
+        self.DeviceCombo.set_active(self.device_index)
+        self.DeviceName = devices_list[self.device_index].name
         self.UpdateChildren()
         gobject.idle_add(self.Update)
 
 
         self.MainWindow.show()
 #        self.MainWindow.hide()
-        gtk.main()
+
+        if self.standalone:
+            gtk.main()
 
     def GetPressure(self):
         ''' Return current device pressure.
         '''
-        dev = gtk.gdk.devices_list()[self.Device]
+        dev = gtk.gdk.devices_list()[self.device_index]
         state = dev.get_state(self.DrawingArea.window)
         return dev.get_axis(state[0], gtk.gdk.AXIS_PRESSURE)
 
     def GetTilt(self):
         ''' Return current device tilt as (xtilt, ytilt).
         '''
-        dev = gtk.gdk.devices_list()[self.Device]
+        dev = gtk.gdk.devices_list()[self.device_index]
         state = dev.get_state(self.DrawingArea.window)
         try:
             x = float(dev.get_axis(state[0], gtk.gdk.AXIS_XTILT))
@@ -642,7 +651,7 @@ class GraphicsTabletApplet:
     def GetWheel(self):
         ''' Return current device wheel state.
         '''
-        dev = gtk.gdk.devices_list()[self.Device]
+        dev = gtk.gdk.devices_list()[self.device_index]
         state = dev.get_state(self.DrawingArea.window)
         try:
             wheel = dev.get_axis(state[0], gtk.gdk.AXIS_WHEEL)
@@ -727,14 +736,14 @@ class GraphicsTabletApplet:
     def DeviceSelected(self, widget):
         ''' Update the various parts of the applet for a new device.
         '''
-        self.Device = widget.get_active()
-        self.DrawingArea.Device = self.Device
-        self.DeviceName = gtk.gdk.devices_list()[self.Device].name
+        self.device_index = widget.get_active()
+        self.DrawingArea.device_index = self.device_index
+        self.DeviceName = gtk.gdk.devices_list()[self.device_index].name
         self.Curve.SetDevice(self.DeviceName)
         self.UpdateChildren()
 
     def Update(self):
-        if self.destroying:
+        if not self.running:
             return False
 
         p = self.GetPressure()

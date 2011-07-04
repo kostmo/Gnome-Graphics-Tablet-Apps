@@ -1,3 +1,6 @@
 TODO:
 
 * Should restart "gnome-panel" after installing the applet into the bonobo server directory
+
+PACKAGING QUESTIONS:
+How to use "dh" to launch ./setup.py (but only for a specific binary package, where two binary packages are specified in the control file)?

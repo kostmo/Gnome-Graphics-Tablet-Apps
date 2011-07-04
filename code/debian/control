@@ -4,25 +4,20 @@ Priority: extra
 Maintainer: Ubuntu MOTU Developers <ubuntu-motu@lists.ubuntu.com>
 XSBC-Original-Maintainer: Karl Ostmo <kostmo@gmail.com>
 Standards-Version: 3.9.1
-Build-Depends: debhelper (>= 5), python, cdbs (>= 0.4.49)
-Build-Depends-Indep: perl, python-support (>= 0.5.3)
+Build-Depends: debhelper (>= 7.0.50), python
+Build-Depends-Indep: python-support (>= 0.5.3)
 XB-Python-Version: ${python:Versions}
-Homepage: http://www.alexmac.cc/tablet-apps/
+Homepage: http://kostmo.github.com/Gnome-Graphics-Tablet-Apps/
 
 Package: tablet-config
 Architecture: all
-Depends: ${misc:Depends}, ${python:Depends}, python-gtk2, xserver-xorg-input-wacom
+Depends: ${misc:Depends}, ${python:Depends}, python-gtk2, python-gnomeapplet, xserver-xorg-input-wacom
 Enhances: tablet-pressure-applet
 Description: GUI utility to configure graphics tablet devices
  The tablet-config utility allows one to select among tablet devices and
  observe what pressure and tilt information is being received from it. This
  dialog also contains a small drawing area to give your pen a quick test.
-
-Package: tablet-pressure-applet
-Architecture: all
-Depends: ${misc:Depends}, ${python:Depends}, python-gtk2, python-gnomeapplet, xserver-xorg-input-wacom
-Suggests: tablet-config
-Description: GNOME panel applet to monitor graphics tablet device
- The tablet-pressure-applet is a small GNOME panel applet that shows how much
- pressure is being applied to your wacom tablet by the current device. Clicking
- on the panel icon brings up the tablet-config dialog.
+ .
+ Includes a small GNOME panel applet that shows how much pressure is being
+ applied to your wacom tablet by the current device. Clicking on the panel
+ applet brings up the tablet-config dialog.

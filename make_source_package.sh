@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. package_defines.sh
+. code/package_defines.mk
 
 cd code
 dch -m
