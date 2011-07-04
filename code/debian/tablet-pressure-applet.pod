@@ -1,6 +1,6 @@
 =head1 NAME
 
-tablet-pressure-applet - Gnome panel applet to monitor graphics tablet devices
+tablet-pressure-applet - GNOME panel applet to monitor graphics tablet devices
 
 =head1 SYNOPSIS
 
@@ -8,13 +8,14 @@ B<tablet-pressure-applet>
 
 =head1 DESCRIPTION
 
- The gnome wacom applet is a small gnome panel applet that shows how much
+ The GNOME Wacom applet is a small gnome panel applet that shows how much
  pressure is being applied to your wacom tablet by the current device. Clicking
  on the panel icon brings up the tablet-config dialog.
 
 =head1 AUTHORS
 
 Alex Mac <alex@alexmac.cc>
+Karl Ostmo <kostmo@gmail.com>
 
 =head1 BUGS
 
