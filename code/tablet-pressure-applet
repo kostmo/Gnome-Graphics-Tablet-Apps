@@ -114,6 +114,6 @@ if __name__ == "__main__":
         gtk.main()
 
     else:
-        pressure_display = PressureDisplay("/usr/share/tablet-apps")
+        pressure_display = PressureDisplay("/usr/share/tablet-config")
         gnomeapplet.bonobo_factory("OAFIID:GNOME_PressureApplet_Factory", gnomeapplet.Applet.__gtype__, "Display tablet device pressure", "1.0", pressure_display.pressureAppletFactory)
 

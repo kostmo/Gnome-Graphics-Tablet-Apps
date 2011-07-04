@@ -1,5 +1,5 @@
-tablet-apps (0.4.0-0ubuntu1) oneiric; urgency=low
+tablet-config (0.4.0-0ubuntu1) oneiric; urgency=low
 
   * Initial Ubuntu package (LP: #372574)
 
- -- Karl Ostmo <kostmo@gmail.com>  Mon, 04 Jul 2011 04:14:39 -0700
+ -- Karl Ostmo <kostmo@gmail.com>  Mon, 04 Jul 2011 04:47:17 -0700

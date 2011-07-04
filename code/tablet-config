@@ -26,8 +26,8 @@ if __name__ == '__main__':
 			prefix = script.replace('bin/tablet-config', '')
 		else:
 			prefix = '/usr/local'
-		iconfile = os.path.join(prefix, 'share/tablet-apps/input-tablet.svg')
-		gladefile = os.path.join(prefix, 'share/tablet-apps/tablet-config.glade')
+		iconfile = os.path.join(prefix, 'share/tablet-config/input-tablet.svg')
+		gladefile = os.path.join(prefix, 'share/tablet-config/tablet-config.glade')
 
 	a = GraphicsTabletConfigTool(gladefile, iconfile)
 	a.Run()

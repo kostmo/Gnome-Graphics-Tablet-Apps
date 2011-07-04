@@ -20,6 +20,6 @@ rm -r $RELEASE_NAME
 
 CHANGES_FILE=${DISTRIBUTABLE_NAME}-*_source.changes
 
-echo "You might want to run 'dput my-ppa $CHANGES_FILE' next"
+echo "You might want to run 'dput ppa:kostmo/ppa $CHANGES_FILE' next"
 echo "-or-"
 echo "run 'dput revu $CHANGES_FILE'"

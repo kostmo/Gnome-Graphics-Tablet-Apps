@@ -22,6 +22,6 @@ if __name__ == "__main__":
                      "Topic :: System :: Hardware"],
         packages=["tablet_apps"],
         data_files=[
-            ("share/tablet-apps", ["tablet-config.glade", "input-tablet.png", "input-tablet.svg"])
+            ("share/tablet-config", ["tablet-config.glade", "input-tablet.png", "input-tablet.svg"])
         ]
     )

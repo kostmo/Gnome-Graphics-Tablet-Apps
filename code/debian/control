@@ -1,4 +1,4 @@
-Source: tablet-apps
+Source: tablet-config
 Section: utils
 Priority: extra
 Maintainer: Ubuntu MOTU Developers <ubuntu-motu@lists.ubuntu.com>
@@ -12,12 +12,11 @@ Homepage: http://kostmo.github.com/Gnome-Graphics-Tablet-Apps/
 Package: tablet-config
 Architecture: all
 Depends: ${misc:Depends}, ${python:Depends}, python-gtk2, python-gnomeapplet, xserver-xorg-input-wacom
-Enhances: tablet-pressure-applet
 Description: GUI utility to configure graphics tablet devices
  The tablet-config utility allows one to select among tablet devices and
  observe what pressure and tilt information is being received from it. This
  dialog also contains a small drawing area to give your pen a quick test.
  .
- Includes a small GNOME panel applet that shows how much pressure is being
- applied to your wacom tablet by the current device. Clicking on the panel
- applet brings up the tablet-config dialog.
+ Includes a GNOME panel applet that shows how much pressure is being applied
+ to your Wacom tablet by the current device. Clicking on the panel applet
+ brings up the tablet-config dialog.
