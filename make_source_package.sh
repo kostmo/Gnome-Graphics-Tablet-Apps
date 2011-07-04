@@ -2,6 +2,8 @@
 
 . code/package_defines.mk
 
+./clean_package_files.sh
+
 cd code
 dch -m
 cd ..
@@ -15,29 +17,6 @@ debuild -S -sa
 cd ..
 rm -r $RELEASE_NAME
 
-
-echo -n "Do you want to upload the orig.tar.gz to kostmo.ath.cx? [Y/n] "
-read character
-case $character in
-    [Yy] | "" ) echo "You responded in the affirmative."
-	scp $DISTRIBUTABLE_NAME.orig.tar.gz kostmo.ath.cx:/Library/WebServer/Documents/software/pyrocket/$RELEASE_NAME.tar.gz
-        ;;
-    * ) echo "Fine, then."
-esac
-
-
-echo "Alternatively, I will upload a new source code release to Google Code."
-echo -n "Do you want me to? [Y/n]: "
-read character
-case $character in
-    [Yy] | "" ) echo "You responded in the affirmative."
-	wget http://support.googlecode.com/svn/trunk/scripts/googlecode_upload.py
-	chmod a+x googlecode_upload.py
-	./googlecode_upload.py -s "source code" -p $PROJECT_ID $DISTRIBUTABLE_NAME.orig.tar.gz
-	rm googlecode_upload.py
-        ;;
-    * ) echo "Fine, then."
-esac
 
 CHANGES_FILE=${DISTRIBUTABLE_NAME}-*_source.changes
 

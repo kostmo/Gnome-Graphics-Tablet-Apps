@@ -2,6 +2,8 @@
 
 . code/package_defines.mk
 
+./clean_package_files.sh
+
 cp -r code $RELEASE_NAME.orig
 cd $RELEASE_NAME.orig
 rm -r debian
